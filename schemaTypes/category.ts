@@ -1,4 +1,5 @@
 import {defineField, defineType} from 'sanity'
+import {preview} from 'vite'
 
 export default defineType({
   name: 'category',
@@ -19,4 +20,10 @@ export default defineType({
       validation: rule => rule.required().warning('Not needed but will look better if added')
     }),
   ],
+  preview: {
+    select: {
+      title: 'title',
+      subtitle: 'description'
+    }
+  }
 })

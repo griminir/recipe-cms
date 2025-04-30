@@ -9,6 +9,7 @@ export default defineType({
       name: 'title',
       title: 'Title',
       type: 'string',
+      validation: rule => rule.required().error('recipe needs a title')
     }),
     defineField({
       name: 'slug',
@@ -22,17 +23,27 @@ export default defineType({
         rule.required().error('Needed to generate website'),
     }),
     defineField({
+      name: 'category',
+      title: 'Categories',
+      type: 'array',
+      of: [{
+        type: 'reference',
+        to: [{type: 'category'}],
+      }
+      ],
+      validation: rule => rule.required().info('This will help the recipe show up in different search categories'),
+    }),
+    defineField({
       name: 'image',
       title: 'Image',
       type: 'image',
+      options: {
+        hotspot: true
+      },
       validation: (rule) =>
         rule
-          .custom((image) => {
-            if (!image)
-              return "We will provide a default image if you don't provide one but it looks better if you provide your own";
-            return true;
-          })
-          .warning(),
+          .required()
+          .warning("We will provide a default image if you don't provide one but it looks better if you provide your own"),
     }),
     defineField({
       name: 'ingredientList',
@@ -77,6 +88,7 @@ export default defineType({
                   'inch',
                 ],
               },
+              validation: rule => rule.required().warning("You dont have to choose a unit of measurement but it will help the cook")
             }),
             defineField({
               name: 'ingredient',
