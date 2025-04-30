@@ -16,10 +16,7 @@ export default defineType({
       title: 'Description',
       type: 'text',
       hidden: context => context?.document?.title === undefined,
-      validation: rule => rule.custom(description => {
-        if (!description) return "This is not required but website will look better with it"
-        return true
-      }).warning()
+      validation: rule => rule.required().warning('Not needed but will look better if added')
     }),
   ],
 })
