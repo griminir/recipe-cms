@@ -1,6 +1,4 @@
 import {defineField, defineType} from 'sanity'
-import ingredient from './ingredient'
-import {preview} from 'vite'
 
 export default defineType({
   name: 'recipe',
