@@ -20,13 +20,8 @@ export default defineType({
       type: 'image',
       validation: rule =>
         rule
-          .custom(image => {
-            if (!image)
-            {return 'not required but will make things look more complete if added'}
-            return true
-          }
-          ).warning()
-
+          .required()
+          .warning('not required but will make things look more complete if added')
     }),
     defineField({
       name: 'price',
@@ -35,11 +30,8 @@ export default defineType({
       description: "price in NOK",
       validation: rule =>
         rule
-          .custom(price => {
-            if (!price) return 'Will make things look more complete if added'
-            return true
-          })
-          .warning()
+          .required()
+          .warning('Will make things look more complete if added')
     }),
     defineField({
       name: 'url',
@@ -47,11 +39,8 @@ export default defineType({
       type: 'url',
       validation: rule =>
         rule
-          .custom(url => {
-            if (!url) return 'Will give people a easy place to find the product if needed'
-            return true
-          })
-          .warning()
+          .required()
+          .warning('Will give people a easy place to find the product if needed')
     }),
   ],
 })
